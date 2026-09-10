@@ -1,0 +1,50 @@
+.services-header { background: var(--cream); border-bottom: 1px solid var(--line); }
+.services-intro { background: var(--cream); padding-bottom: 6rem; }
+.services-intro h1 { font-size: clamp(3.5rem, 7vw, 6.5rem); margin: 1rem 0 1.5rem; }
+.service-list-section { background: var(--paper); padding: 0 0 8rem; }
+.public-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+.public-service-card { min-height: 330px; padding: 2rem; background: var(--sage); display: flex; flex-direction: column; }
+.public-service-card:nth-child(3n + 2) { background: var(--cream); }
+.public-service-card:nth-child(3n) { background: var(--ink); color: white; }
+.service-card-top { display: flex; justify-content: space-between; color: var(--clay-dark); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.public-service-card:nth-child(3n) .service-card-top { color: #e8c0af; }
+.public-service-card h2 { font-size: 2rem; margin: 3.5rem 0 .9rem; }
+.public-service-card p { color: var(--muted); font-size: .9rem; margin: 0; max-width: 290px; }
+.public-service-card:nth-child(3n) p { color: rgba(255,255,255,.75); }
+.service-meta { align-items: end; border-top: 1px solid rgba(37,35,34,.18); display: flex; justify-content: space-between; margin-top: auto; padding-top: 1.2rem; }
+.public-service-card:nth-child(3n) .service-meta { border-color: rgba(255,255,255,.25); }
+.service-meta strong { font-family: "Playfair Display", serif; font-size: 1.5rem; font-weight: 500; }
+.service-meta span { color: var(--muted); font-size: .78rem; }
+.public-service-card:nth-child(3n) .service-meta span { color: rgba(255,255,255,.75); }
+.empty-services { border: 1px solid var(--line); padding: 4rem 2rem; text-align: center; }
+.empty-services h2 { font-size: 2rem; }
+.empty-services p { color: var(--muted); }
+.services-cta { background: var(--paper); padding: 0 0 8rem; }
+.services-cta-panel { align-items: end; background: var(--clay); color: white; display: flex; justify-content: space-between; padding: 4rem 5rem; }
+.services-cta-panel .eyebrow { color: #f8ded3; }
+.services-cta-panel h2 { margin-bottom: 0; }
+.admin-page { background: var(--paper); }
+.admin-main { padding: 5rem 0 8rem; }
+.admin-main h1 { font-size: clamp(3rem, 6vw, 5.5rem); margin: .6rem 0 3rem; }
+.admin-form-panel, .admin-list-panel { background: white; border: 1px solid var(--line); padding: 2.5rem; }
+.admin-list-panel { margin-top: 2rem; }
+.admin-form-panel h2, .admin-list-panel h2 { font-size: 2rem; margin: 0 0 1.8rem; }
+.admin-form-panel label { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .45rem; text-transform: uppercase; }
+.admin-form-panel .form-control { border: 1px solid var(--line); border-radius: 0; color: var(--ink); padding: .75rem .9rem; }
+.admin-form-panel .form-control:focus { border-color: var(--clay); box-shadow: 0 0 0 .2rem rgba(181, 109, 83, .2); }
+.admin-form-actions { align-items: center; display: flex; gap: 1.5rem; margin-top: 1.8rem; }
+.admin-form-actions .btn { margin-top: 0; }
+.admin-list-heading { align-items: baseline; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; }
+.admin-list-heading span, .admin-muted { color: var(--muted); font-size: .85rem; }
+.admin-table { margin: 0; vertical-align: middle; }
+.admin-table th { color: var(--muted); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+.admin-table td, .admin-table th { border-color: var(--line); padding: 1.1rem .75rem; }
+.admin-table td:first-child { min-width: 240px; }
+.admin-table small { color: var(--muted); display: block; font-size: .8rem; margin-top: .25rem; max-width: 310px; }
+.admin-actions { align-items: center; display: flex; gap: 1rem; }
+.admin-actions a, .admin-actions button { background: none; border: 0; color: var(--clay-dark); font-size: .78rem; font-weight: 700; padding: 0; text-decoration: none; }
+.admin-actions button { color: #9b3d35; }
+.admin-actions a:focus-visible, .admin-actions button:focus-visible { outline: 2px solid #315f56; outline-offset: 3px; }
+@media (max-width: 575px) { .admin-main { padding: 3.5rem 0 5rem; } .admin-form-panel, .admin-list-panel { padding: 1.3rem; } .admin-table td:first-child { min-width: 180px; } .admin-actions { align-items: start; flex-direction: column; gap: .4rem; } }
+@media (max-width: 991px) { .public-services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 575px) { .services-intro { padding-bottom: 4rem; } .service-list-section, .services-cta { padding-bottom: 5rem; } .public-services-grid { display: block; } .public-service-card { margin-bottom: 1rem; } .services-cta-panel { align-items: start; display: block; padding: 2.5rem 2rem; } .services-cta-panel .btn { margin-top: 2rem; } }

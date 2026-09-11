@@ -1,14 +1,15 @@
 # The Glam Room
 
-The Glam Room is a PHP/MySQL beauty salon web application for displaying salon information and services, managing services through an admin page, and receiving customer enquiries.
+The Glam Room is a PHP/MySQL beauty salon web application designed for a small local beauty business. The website allows customers to view salon information and available services, submit enquiries, and provides an admin interface for managing salon services.
 
 ## Features
 
 - Responsive salon homepage with hero, About, Services preview, contact call-to-action, and footer sections.
-- Public Services page displaying services from the database.
-- Admin Services page with create, read, update, and delete functionality.
-- Public Contact/Enquiry form with a database-backed service selection.
-- Server-side validation and prepared MySQL statements.
+- Public Services page displaying services stored in the database.
+- Admin Services page providing full create, read, update, and delete (CRUD) functionality.
+- Public Contact/Enquiry form with database-backed service selection.
+- Server-side form validation with clear validation messages.
+- MySQL prepared statements for database operations.
 - Accessible navigation, headings, labels, focus states, skip links, and status/error messages.
 - Responsive layouts for desktop, tablet, and mobile screen sizes.
 
@@ -28,67 +29,117 @@ The Glam Room is a PHP/MySQL beauty salon web application for displaying salon i
 
 ```text
 PRO204 Assignment2/
-|-- index.php                 Homepage
-|-- services.php              Public database-driven Services page
-|-- contact.php               Public customer enquiry form
+|-- index.php                  Homepage
+|-- services.php               Public database-driven Services page
+|-- contact.php                Public customer enquiry form
 |-- admin/
-|   `-- services.php          Admin Services CRUD page
+|   `-- services.php           Admin Services CRUD page
 |-- config/
-|   `-- database.php          Existing MySQL connection
+|   `-- database.php           MySQL database connection
 |-- database/
-|   `-- glam_room.sql         Database SQL file; currently empty
+|   `-- glam_room.sql          Database schema and sample data export
 |-- assets/
 |   |-- css/
-|   |   |-- style.css         Shared website styles
-|   |   |-- services.css      Services and admin styles
+|   |   |-- style.css          Shared website styles
+|   |   |-- services.css       Services and admin styles
 |   |   `-- contact.css        Contact page styles
 |   `-- js/
-|       `-- main.js           Navigation and navbar behavior
-|-- .env.example              Database variable documentation template
-|-- .gitignore                Local/private file ignore rules
-`-- README.md                 Project documentation
+|       `-- main.js            Navigation and navbar behaviour
+|-- .env.example               Database variable documentation template
+|-- .gitignore                 Local/private file ignore rules
+`-- README.md                  Project documentation
 ```
 
 ## Requirements
+
+To run the project locally, the following are required:
 
 - Windows with XAMPP installed.
 - Apache enabled in XAMPP.
 - MySQL enabled in XAMPP.
 - PHP with the MySQLi extension. XAMPP includes PHP and MySQLi.
-- A browser with JavaScript enabled for the responsive Bootstrap navigation.
-- Internet access for Bootstrap and Google Fonts CDN resources, and the homepage's remote Unsplash images.
+- A modern web browser with JavaScript enabled.
+- Internet access for Bootstrap, Google Fonts, and remote homepage images.
+
+### Local Server Ports
+
+- Apache HTTP: Port 80
+- MySQL: Port 3306
+
+The application runs locally through Apache using the standard HTTP port.
 
 ## Local Setup with XAMPP
 
 1. Install XAMPP.
-2. Copy or place this project directory at:
 
-   ```text
-   C:\xampp\htdocs\PRO204 Assignment2
-   ```
+2. Place the project folder in:
+
+```text
+C:\xampp\htdocs\PRO204 Assignment2
+```
 
 3. Open the XAMPP Control Panel.
+
 4. Click **Start** beside **Apache**.
+
 5. Click **Start** beside **MySQL**.
-6. Open phpMyAdmin at `http://localhost/phpmyadmin/`.
-7. Create a database named `glam_room` using the **New** database option.
-8. Select the `glam_room` database and import `database/glam_room.sql` from the **Import** tab.
-9. Start the application at:
 
-   `http://localhost/PRO204%20Assignment2/`
+6. Open phpMyAdmin:
 
-### Current SQL File Limitation
+```text
+http://localhost/phpmyadmin/
+```
 
-The file `database/glam_room.sql` is currently present but empty. It therefore does not create the required tables when imported. The application expects at least these tables and columns:
+7. Create a new database named:
 
-- `services`: `id`, `service_name`, `category`, `description`, `price`, `duration`, `created_at`
-- `enquiries`: `id`, `name`, `email`, `phone`, `service_id`, `message`, `created_at`
+```text
+glam_room
+```
 
-A populated schema/data SQL export must be supplied before a fresh database can run the database-driven pages. Do not delete or replace the existing SQL file without the required assignment schema.
+8. Select the `glam_room` database and open the **Import** tab.
+
+9. Import:
+
+```text
+database/glam_room.sql
+```
+
+10. After the database import is complete, open the application:
+
+```text
+http://localhost/PRO204%20Assignment2/
+```
+
+## Database Setup
+
+The `database/glam_room.sql` file contains the database structure required by the application.
+
+The application uses two main database tables:
+
+- `services` – stores salon services including service name, category, description, price, duration, and creation date.
+- `enquiries` – stores customer enquiries including name, email, phone, selected service, message, and submission date.
+
+To initialise the database on a new local environment:
+
+1. Start Apache and MySQL in XAMPP.
+2. Open phpMyAdmin.
+3. Create a database named `glam_room`.
+4. Select the database.
+5. Open the **Import** tab.
+6. Select `database/glam_room.sql`.
+7. Click **Import/Go**.
+
+After the import is complete, the database-driven areas of the application are ready to use.
 
 ## Database Configuration
 
-The existing connection is in `config/database.php` and currently uses these local values directly:
+The database connection is located in:
+
+```text
+config/database.php
+```
+
+The current local development configuration uses:
 
 ```text
 Host: localhost
@@ -97,7 +148,7 @@ Password: blank
 Database: glam_room
 ```
 
-`.env.example` documents the equivalent variables:
+The `.env.example` file documents the equivalent configuration variables:
 
 ```text
 DB_HOST=localhost
@@ -106,20 +157,43 @@ DB_PASSWORD=
 DB_DATABASE=glam_room
 ```
 
-The current PHP application does not automatically read `.env` files. The example file is documentation for local configuration and does not contain real secrets. If a real `.env` file is created, it is excluded by `.gitignore`.
+The current PHP application does not automatically load `.env` files. The `.env.example` file is provided as configuration documentation and contains no real secrets.
+
+If a real `.env` file is created in future development, it is excluded through `.gitignore`.
 
 ## Application URLs
 
-With Apache running, use these URLs:
+With Apache and MySQL running, the application can be accessed at:
 
-- Homepage: `http://localhost/PRO204%20Assignment2/`
-- Public Services: `http://localhost/PRO204%20Assignment2/services.php`
-- Contact/Enquiry: `http://localhost/PRO204%20Assignment2/contact.php`
-- Admin Services CRUD: `http://localhost/PRO204%20Assignment2/admin/services.php`
+Homepage:
+
+```text
+http://localhost/PRO204%20Assignment2/
+```
+
+Public Services:
+
+```text
+http://localhost/PRO204%20Assignment2/services.php
+```
+
+Contact/Enquiry:
+
+```text
+http://localhost/PRO204%20Assignment2/contact.php
+```
+
+Admin Services CRUD:
+
+```text
+http://localhost/PRO204%20Assignment2/admin/services.php
+```
 
 ## Public Services Page
 
-`services.php` reads service records from the `services` table with a prepared `SELECT` statement. Each service card displays:
+The `services.php` page retrieves service records from the `services` database table.
+
+Each service card displays:
 
 - Service name
 - Category
@@ -127,64 +201,168 @@ With Apache running, use these URLs:
 - Price
 - Duration
 
-Database query failures show a general customer-friendly message. If no records are available, the page displays an empty-state message instead of failing.
+Database failures are handled using a general user-friendly message rather than displaying raw database information. If no services are available, an appropriate empty-state message is displayed.
 
 ## Admin Services Management
 
-`admin/services.php` provides full CRUD management for the `services` table:
+The `admin/services.php` page provides full CRUD functionality for the `services` table.
 
-- **Create:** add a service with name, category, description, price, and duration.
-- **Read:** view all services in an admin table.
-- **Update:** select an existing service with its Edit action and save changes.
-- **Delete:** remove a service after a browser confirmation prompt.
+### Create
+Administrators can add a new service by entering its name, category, description, price, and duration.
 
-The admin page uses prepared statements and validates required text fields, non-negative prices, positive whole-number durations, and invalid or missing service IDs. It does not include authentication, so it should only be used in a protected local/development environment.
+### Read
+All existing services are retrieved from the database and displayed on the admin page.
+
+### Update
+An existing service can be selected using the Edit action. Its information can then be modified and saved back to the database.
+
+### Delete
+Existing services can be removed using the Delete action with a browser confirmation prompt.
+
+Server-side validation checks required fields, non-negative prices, positive whole-number durations, and invalid or missing service IDs.
+
+Prepared statements are used for database operations.
+
+The admin interface does not currently include authentication and is intended for a local/development environment.
 
 ## Contact and Enquiry Form
 
-`contact.php` allows customers to submit:
+The `contact.php` page allows customers to submit:
 
 - Name
 - Email
 - Phone (optional)
-- Service
+- Selected service
 - Message
 
-The Service dropdown is loaded dynamically from the `services` table. Server-side validation requires the name, email, selected service, and message; validates email format; and confirms that the selected service exists. Valid submissions are stored in the `enquiries` table using a prepared `INSERT` statement.
+The Service dropdown is populated dynamically using records from the `services` table.
 
-Validation errors are shown in an accessible alert summary and submitted values are preserved when validation fails. Successful submissions show a confirmation message. Database and query failures are presented with general messages rather than raw SQL details.
+Server-side validation:
+
+- Requires a customer name.
+- Requires a valid email address.
+- Requires a valid service selection.
+- Requires an enquiry message.
+- Checks that the selected service exists.
+
+Valid enquiries are stored in the `enquiries` database table using a prepared `INSERT` statement.
+
+When validation fails, clear error messages are displayed and previously entered values are preserved where appropriate.
+
+Successful submissions display a confirmation message.
 
 ## Accessibility
 
-- Semantic HTML5 elements are used for page structure.
-- Navigation has an accessible label and responsive Bootstrap toggle button.
-- A skip link provides keyboard access to main content.
-- Form controls have associated `label` elements.
-- Error and success messages use alert/status semantics and ARIA live behavior.
-- Visible focus styles are defined for links and buttons.
-- Images include descriptive alternative text where images are used.
-- Headings provide a logical page hierarchy.
+Accessibility considerations implemented throughout the application include:
+
+- Semantic HTML5 page structure.
+- Accessible navigation labels.
+- Skip links for keyboard users.
+- Associated labels for form controls.
+- Keyboard-accessible navigation and controls.
+- Visible focus styles for links, buttons, and form elements.
+- Error and success messages using appropriate alert/status semantics and ARIA live behaviour.
+- Alternative text for relevant images.
+- Logical heading hierarchy.
+- Responsive content that remains usable when zoomed.
+
+Keyboard navigation and 200% browser zoom were manually tested on key public pages.
 
 ## Responsive Design
 
-Bootstrap's responsive grid and navbar are combined with custom media queries in the project CSS. The homepage, Services page, Contact page, and admin service interface adapt for desktop, tablet, and mobile widths. On small screens, the navigation collapses into a Bootstrap menu button.
+The application combines Bootstrap's responsive grid and navigation components with custom CSS media queries.
+
+The homepage, Services page, Contact page, and Admin Services interface adapt to:
+
+- Desktop screens
+- Tablet screens
+- Mobile screens
+
+On smaller screens, the navigation collapses into a Bootstrap navigation menu.
+
+Responsive behaviour was manually checked using browser developer tools.
+
+## Server Management and Deployment
+
+The application is configured for local deployment using XAMPP.
+
+Apache is used as the PHP web server and MySQL provides persistent database storage. Both services must be running in the XAMPP Control Panel before accessing the application.
+
+The application does not require a build or compilation command because it uses standard PHP, HTML, CSS, JavaScript, and MySQL.
+
+### Start Procedure
+
+1. Open XAMPP Control Panel.
+2. Start Apache.
+3. Start MySQL.
+4. Initialise the `glam_room` database using `database/glam_room.sql` if required.
+5. Open:
+
+```text
+http://localhost/PRO204%20Assignment2/
+```
+
+### Stop Procedure
+
+Apache and MySQL can be stopped from the XAMPP Control Panel after testing or development is complete.
+
+The submitted version is documented for reproducible local deployment rather than relying on a public production server.
+
+## Testing
+
+The application was manually tested for its main functional requirements.
+
+Testing included:
+
+- Creating a new service.
+- Reading/displaying database services.
+- Editing an existing service.
+- Deleting a service.
+- Testing blank required service fields.
+- Testing invalid price values.
+- Testing invalid duration values.
+- Testing invalid service IDs.
+- Submitting an empty enquiry form.
+- Testing an invalid email address.
+- Submitting a valid enquiry.
+- Confirming that valid enquiries are stored in the database.
+- Testing responsive layouts using browser developer tools.
+- Testing keyboard navigation and visible focus states.
+- Testing key public pages at 200% browser zoom.
 
 ## Known Limitations
 
-- `database/glam_room.sql` is empty and does not currently create or seed the required database tables.
-- The application currently uses hardcoded local database values in `config/database.php`; `.env.example` is documentation only and is not loaded automatically.
-- The admin Services page has no login or role-based access control.
-- There is no CSRF protection on admin or enquiry forms.
-- The application has no pagination, search, filtering, image upload, booking calendar, email notification, or enquiry-management page.
-- Bootstrap, Google Fonts, and homepage images are loaded from external CDNs/services, so those resources require network access.
-- The current application expects the database and tables to exist before the public Services and Contact pages can load their dynamic content.
+- The application currently uses local database values in `config/database.php`; `.env.example` is documentation only and is not automatically loaded.
+- The Admin Services page does not currently include login or role-based access control.
+- CSRF protection is not currently implemented on the forms.
+- The application does not include pagination, search, advanced filtering, image uploads, a booking calendar, email notifications, or an enquiry-management interface.
+- Bootstrap, Google Fonts, and remote homepage images rely on external CDN/services and therefore require an internet connection.
+- The database must be initialised using `database/glam_room.sql` before the database-driven pages can be used.
 
 ## Security Notes
 
-- Keep real credentials in a local `.env` or server configuration and never commit them. `.env` is ignored by `.gitignore`; `.env.example` contains no secrets.
-- Use prepared statements for database input, as implemented by the public Services, Contact, and admin Services pages.
-- User-provided output is escaped before being rendered in the public and admin pages.
-- Restrict access to `admin/services.php` before deploying publicly because authentication is not implemented.
-- Add CSRF protection, authentication, authorization, HTTPS, rate limiting, and production-safe error logging before using the application in production.
-- Avoid using the XAMPP default `root` account with a blank password outside a local development environment.
-- Do not expose database connection errors or PHP error details in production.
+- Real production credentials should never be committed to the repository.
+- `.env` is excluded through `.gitignore`.
+- `.env.example` contains no real credentials or secrets.
+- Prepared statements are used for database operations.
+- User-provided output is escaped before being rendered where applicable.
+- Database errors are presented to users using general messages rather than raw SQL information.
+- The Admin Services page should be protected with authentication and authorisation before production use.
+- CSRF protection, HTTPS, rate limiting, authentication, authorisation, and production-safe error logging should be added before a production deployment.
+- The XAMPP default `root` account with a blank password is intended only for local development and should not be used in a production environment.
+
+## Git Repository
+
+The project source code and version history are maintained using Git and GitHub.
+
+Repository:
+
+```text
+https://github.com/mehaksharm99880-web/PRO204-Assignment2
+```
+
+## Tools and Resources
+
+The project was developed using Visual Studio Code, XAMPP, phpMyAdmin, Git, and GitHub.
+
+GitHub Copilot/AI-assisted tools were used during development to assist with code generation, debugging, documentation, and development guidance. Generated suggestions were reviewed, tested, and modified as required before being included in the project.
